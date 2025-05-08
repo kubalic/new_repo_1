@@ -5,10 +5,17 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
     <link href="https://fonts.googleapis.com/css2?family=Nunito&display=swap" rel="stylesheet">
 </head>
-<body>
+<body style="background-image: url('{{ url_for('static', filename='background.png') }}'); background-size: cover; background-position: center;">
+
     {% block content %}{% endblock %}
+
 </body>
 </html>
+
+
+
+
+
 
 
 

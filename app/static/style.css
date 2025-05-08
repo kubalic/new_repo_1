@@ -2,7 +2,6 @@ body {
   margin: 0;
   padding: 0;
   font-family: 'Nunito', sans-serif;
-  background: url("/static/background.png") no-repeat center center fixed;
   background-size: cover;
   height: 100vh;
   display: flex;
@@ -23,10 +22,6 @@ body {
   margin-bottom: 0.5em;
 }
 
-.links {
-  margin-top: 1em;
-}
-
 .links a {
   margin: 0 15px;
   text-decoration: none;
@@ -38,6 +33,89 @@ body {
 .links a:hover {
   color: #b7e4c7;
 }
+
+
+.top-bar {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 15px;
+  padding: 15px;
+  font-size: 1.1em;
+  color: white;
+  background-color: rgba(0, 0, 0, 0.3);
+}
+
+.top-bar span {
+  margin-right: auto;
+  padding-left: 15px;
+  font-weight: bold;
+}
+
+.top-bar a {
+  color: white;
+  text-decoration: none;
+}
+
+.top-bar a:hover {
+  text-decoration: underline;
+}
+
+.form-container {
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 30px;
+  border-radius: 12px;
+  color: white;
+  width: 320px;
+  margin: 80px auto;
+  text-align: center;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+}
+
+.form-container h2 {
+  font-size: 2em;
+  margin-bottom: 20px;
+}
+
+.form-container input[type="text"],
+.form-container input[type="email"],
+.form-container input[type="password"] {
+  width: 90%;
+  padding: 10px;
+  margin: 8px 0;
+  border: none;
+  border-radius: 5px;
+}
+
+.form-container input[type="submit"] {
+  margin-top: 10px;
+  padding: 10px 20px;
+  border: none;
+  background-color: #d8f3dc;
+  color: black;
+  font-weight: bold;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.form-container input[type="submit"]:hover {
+  background-color: #b7e4c7;
+}
+
+.btn {
+  padding: 10px 20px;
+  border: none;
+  background-color: #d8f3dc;
+  color: black;
+  font-weight: bold;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.btn:hover {
+  background-color: #b7e4c7;
+}
+
 
 
 

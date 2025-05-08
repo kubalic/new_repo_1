@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="form-container">
+    <h2>Add a New Plant 🌱</h2>
+    <form method="POST" enctype="multipart/form-data">
+        {{ form.hidden_tag() }}
+
+        <div>
+            {{ form.nickname.label }}<br>
+            {{ form.nickname(size=32) }}
+        </div>
+
+        <div>
+            {{ form.category_id.label }}<br>
+            {{ form.category_id() }}
+        </div>
+
+        <div>
+            {{ form.last_watering.label }}<br>
+            {{ form.last_watering() }}
+        </div>
+
+        <div>
+            {{ form.photo.label }}<br>
+            {{ form.photo() }}
+        </div>
+
+        <div style="margin-top: 15px;">
+            {{ form.submit(class="btn") }}
+        </div>
+    </form>
+</div>
+{% endblock %}
+
+
