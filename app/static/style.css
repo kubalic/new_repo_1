@@ -2,14 +2,13 @@ body {
   margin: 0;
   padding: 0;
   font-family: 'Nunito', sans-serif;
+  background: url("/static/background.png") no-repeat center center fixed;
   background-size: cover;
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  color: white;
+  min-height: 100vh;
+  display: block;
 }
 
+/* Welcome Box (Landing Page) */
 .welcome {
   text-align: center;
   background-color: rgba(0, 0, 0, 0.5);
@@ -34,7 +33,7 @@ body {
   color: #b7e4c7;
 }
 
-
+/* Top Right Bar */
 .top-bar {
   position: absolute;
   top: 15px;
@@ -57,23 +56,26 @@ body {
   background-color: rgba(0, 0, 0, 0.7);
 }
 
-
+/* Form Container (Login/Register/Profile etc.) */
 .form-container {
   background-color: rgba(0, 0, 0, 0.5);
   padding: 30px;
   border-radius: 12px;
   color: white;
-  width: 320px;
-  margin: 80px auto;
+  width: 90%;
+  max-width: 600px;
+  margin: 40px auto;
   text-align: center;
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
 }
 
+/* Form Header */
 .form-container h2 {
   font-size: 2em;
   margin-bottom: 20px;
 }
 
+/* Form Fields */
 .form-container input[type="text"],
 .form-container input[type="email"],
 .form-container input[type="password"] {
@@ -84,6 +86,7 @@ body {
   border-radius: 5px;
 }
 
+/* Form Submit Button */
 .form-container input[type="submit"] {
   margin-top: 10px;
   padding: 10px 20px;
@@ -99,6 +102,7 @@ body {
   background-color: #b7e4c7;
 }
 
+/* Buttons (Add Plant, Register, etc.) */
 .btn {
   padding: 10px 20px;
   border: none;
@@ -107,16 +111,118 @@ body {
   font-weight: bold;
   border-radius: 5px;
   cursor: pointer;
-  text-decoration: none;  
+  text-decoration: none;
 }
-
 
 .btn:hover {
   background-color: #b7e4c7;
 }
 
+/*  Flash Messages */
+.flash {
+  background-color: #d8f3dc;
+  color: black;
+  font-weight: bold;
+  padding: 10px;
+  border-radius: 8px;
+  margin: 10px auto;
+  max-width: 90%;
+}
 
+.alert {
+  background-color: #ffe0e0;
+  color: #a94442;
+  padding: 12px;
+  margin: 15px auto;
+  border-radius: 8px;
+  width: 80%;
+  max-width: 500px;
+  text-align: center;
+  font-weight: bold;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
 
+.alert-success {
+  background-color: #d4edda;
+  color: #155724;
+}
 
+.alert-danger, .alert-warning {
+  background-color: #f8d7da;
+  color: #721c24;
+}
 
+.top-left {
+  position: absolute;
+  top: 15px;
+  left: 20px;
+  z-index: 1000;
+}
 
+.top-left a {
+  color: white;
+  text-decoration: none;
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 8px 12px;
+  border-radius: 8px;
+  font-weight: bold;
+}
+
+.top-left a:hover {
+  background-color: rgba(0, 0, 0, 0.7);
+}
+
+/* Remove background from top bar */
+.top-bar.no-background {
+  background: none;
+  position: absolute;
+  top: 15px;
+  right: 20px;
+}
+
+/* Gallery Container */
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 30px;
+  padding: 40px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Gallery Card */
+.gallery-card {
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  padding: 10px;
+  text-align: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+/* Category Name */
+.gallery-name {
+  font-weight: bold;
+  color: white;
+  margin-bottom: 8px;
+}
+
+/* Category Image */
+.gallery-card img {
+  width: 100%;
+  height: 250px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.gallery-name {
+  font-weight: bold;
+  color: #2f3d15;
+  margin-bottom: 8px;
+}
+
+.gallery-nickname {
+  color: #2f3d15;
+  font-size: 0.95em;
+  margin-top: 5px;
+  font-style: italic;
+}

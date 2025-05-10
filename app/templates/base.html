@@ -8,8 +8,13 @@
 
 <body style="background-image: url('{{ url_for('static', filename='background.png') }}'); background-size: cover; background-position: center;">
 
-<!-- Top Navigation Bar -->
-<div class="top-bar">
+<!-- Top Left Dashboard Button -->
+<div class="top-left">
+    <a href="{{ url_for('routes.index') }}">🏠 Dashboard</a>
+</div>
+
+<!-- Top Navigation Bar (no background shading) -->
+<div class="top-bar no-background">
     {% if current_user.is_authenticated %}
         <a href="{{ url_for('routes.profile') }}">My Profile</a>
     {% else %}
@@ -31,6 +36,20 @@
 
 <!-- Page-specific content -->
 {% block content %}{% endblock %}
+
+<!-- Plant Gallery for All User Plants -->
+{% if request.endpoint == 'routes.index' and user_plants %}
+  <div class="gallery">
+    {% for plant in user_plants %}
+      <div class="gallery-card">
+        <div class="gallery-name">{{ plant.owner.username }} – {{ plant.category.name }}</div>
+        {% if plant.photo_path %}
+          <img src="{{ url_for('static', filename='uploads/' ~ plant.photo_path) }}" alt="{{ plant.category.name }}">
+        {% endif %}
+      </div>
+    {% endfor %}
+  </div>
+{% endif %}
 
 <!-- Auto-hide flash after 3 seconds -->
 <script>

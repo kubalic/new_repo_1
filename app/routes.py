@@ -15,7 +15,10 @@ routes = Blueprint('routes', __name__)
 # Home page
 @routes.route('/')
 def index():
-    return render_template('index.html')
+    user_plants = Plant.query.all()
+    return render_template('index.html', user_plants=user_plants)
+
+
 
 # User registration
 @routes.route('/register', methods=['GET', 'POST'])
@@ -105,17 +108,28 @@ def add_plant():
 @login_required
 def add_category():
     form = AddCategoryForm()
+
     if form.validate_on_submit():
+        # Check if latin_name already exists in DB
+        existing = PlantCategory.query.filter_by(latin_name=form.latin_name.data).first()
+        if existing:
+            flash("❌ Error: Plant with this Latin name already exists.", "danger")
+            return render_template('add_category.html', form=form)
+
+        # Create and add new category
         category = PlantCategory(
             name=form.name.data,
             latin_name=form.latin_name.data,
-            watering_interval=int(form.watering_interval.data)
+            watering_interval=int(form.watering_interval.data),
+            info=form.info.data
         )
         db.session.add(category)
         db.session.commit()
-        flash('Category added!', 'success')
+        flash('✅ Category added successfully!', 'success')
         return redirect(url_for('routes.index'))
+
     return render_template('add_category.html', form=form)
+
 
 # User profile: shows logged-in user's plants
 @routes.route('/profile')
@@ -135,3 +149,17 @@ def edit_profile():
         flash('Profile updated!', 'success')
         return redirect(url_for('routes.profile'))
     return render_template('edit_profile.html', form=form)
+
+# Delete a plant
+@routes.route('/delete-plant/<int:plant_id>', methods=['POST'])
+@login_required
+def delete_plant(plant_id):
+    plant = Plant.query.get_or_404(plant_id)
+    if plant.username != current_user.username:
+        flash("You don't have permission to delete this plant.", "danger")
+        return redirect(url_for('routes.profile'))
+
+    db.session.delete(plant)
+    db.session.commit()
+    flash('Plant deleted.', 'info')
+    return redirect(url_for('routes.profile'))
