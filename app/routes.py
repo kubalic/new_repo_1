@@ -93,3 +93,10 @@ def add_category():
         flash('Category added!', 'success')
         return redirect(url_for('routes.index'))
     return render_template('add_category.html', form=form)
+
+#route to profile page
+@routes.route('/profile')
+@login_required
+def profile():
+    plants = Plant.query.filter_by(user_id=current_user.id).all()
+    return render_template('profile.html', plants=plants)

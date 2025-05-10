@@ -5,12 +5,27 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
     <link href="https://fonts.googleapis.com/css2?family=Nunito&display=swap" rel="stylesheet">
 </head>
+
 <body style="background-image: url('{{ url_for('static', filename='background.png') }}'); background-size: cover; background-position: center;">
+
+<!--  Top Navigation Bar -->
+<div class="top-bar">
+    {% if current_user.is_authenticated %}
+        <a href="{{ url_for('routes.profile') }}">My Profile</a>
+    {% else %}
+        <a href="{{ url_for('routes.login') }}">Login</a>
+        <a href="{{ url_for('routes.register') }}">Register</a>
+    {% endif %}
+</div>
+
+
+
 
     {% block content %}{% endblock %}
 
 </body>
 </html>
+
 
 
 

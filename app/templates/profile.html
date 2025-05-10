@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="form-container">
+    <h2>🌿 My Profile</h2>
+    <p>Welcome, {{ current_user.username }}!</p>
+
+    <a href="{{ url_for('routes.add_plant') }}" class="btn">➕ Add a New Plant</a>
+
+    <h3>My Plants:</h3>
+    {% if plants %}
+        <ul>
+        {% for plant in plants %}
+            <li>
+                <strong>{{ plant.nickname }}</strong> ({{ plant.category.name }})<br>
+                Last Watering: {{ plant.last_watering }}<br>
+                Next Watering: {{ plant.next_watering }}
+            </li>
+        {% endfor %}
+        </ul>
+    {% else %}
+        <p>You haven't added any plants yet.</p>
+    {% endif %}
+</div>
+{% endblock %}
+
+
