@@ -12,8 +12,8 @@
         </div>
 
         <div>
-            {{ form.category_id.label }}<br>
-            {{ form.category_id() }}
+            {{ form.latin_name.label }}<br>
+            {{ form.latin_name() }}
         </div>
 
         <div>
@@ -24,6 +24,11 @@
         <div>
             {{ form.photo.label }}<br>
             {{ form.photo() }}
+        </div>
+
+        <div>
+            {{ form.description.label }}<br>
+            {{ form.description(rows=3, cols=40) }}
         </div>
 
         <div style="margin-top: 15px;">
