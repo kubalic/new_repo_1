@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="form-container">
+    <h2>{{ user.username }}'s Profile 🌿</h2>
+    {% if user.description %}
+        <p style="margin-bottom: 20px;">{{ user.description }}</p>
+    {% endif %}
+
+    <h3 style="margin-top: 30px;">Their Plants:</h3>
+    {% if plants %}
+        <div class="gallery">
+            {% for plant in plants %}
+                <div class="gallery-card">
+                    <div class="gallery-name">{{ plant.category.name }}</div>
+                    {% if plant.photo_path %}
+                        <img src="{{ url_for('static', filename='uploads/' ~ plant.photo_path) }}" alt="plant photo">
+                    {% endif %}
+                    <div class="gallery-nickname">{{ plant.plant_name }}</div>
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <p>This user hasn't added any plants yet.</p>
+    {% endif %}
+</div>
+{% endblock %}

@@ -2,25 +2,45 @@
 {% block content %}
 <div class="form-container">
     <h2>🌿 My Profile</h2>
-    <p>Welcome, {{ current_user.username }}!</p>
 
+    {% if current_user.description %}
+        <p style="font-style: italic; margin-bottom: 20px;">"{{ current_user.description }}"</p>
+    {% endif %}
+
+    <a href="{{ url_for('routes.edit_profile') }}" class="btn">📝 Edit Description</a>
     <a href="{{ url_for('routes.add_plant') }}" class="btn">➕ Add a New Plant</a>
 
-    <h3>My Plants:</h3>
+    <h3 style="margin-top: 30px;">My Plants:</h3>
     {% if plants %}
-        <ul>
         {% for plant in plants %}
-            <li>
-                <strong>{{ plant.nickname }}</strong> ({{ plant.category.name }})<br>
-                Last Watering: {{ plant.last_watering }}<br>
-                Next Watering: {{ plant.next_watering }}
-            </li>
+            <div style="margin-bottom: 30px; text-align: center;">
+                <h4>{{ plant.plant_name }} <small style="font-weight: normal;">({{ plant.category.name }})</small></h4>
+
+                {% if plant.description %}
+                    <p><em>{{ plant.description }}</em></p>
+                {% endif %}
+
+                {% if plant.photo_path %}
+                    <img src="{{ url_for('static', filename='uploads/' ~ plant.photo_path) }}"
+                         alt="Plant photo"
+                         style="width: 250px; height: auto; border-radius: 12px; margin: 15px 0;">
+                {% endif %}
+
+                <div>
+                    🌧️ Last Watering: {{ plant.last_watering }}<br>
+                    🌱 Next Watering: {{ plant.next_watering }}
+                </div>
+
+                <!-- Delete form -->
+                <form action="{{ url_for('routes.delete_plant', plant_id=plant.id) }}" method="POST" style="margin-top: 15px;">
+                    <button class="btn" onclick="return confirm('Are you sure you want to delete this plant?');">🗑️ Delete</button>
+                </form>
+
+                <hr style="margin-top: 20px; border: 1px solid #ccc;">
+            </div>
         {% endfor %}
-        </ul>
     {% else %}
         <p>You haven't added any plants yet.</p>
     {% endif %}
 </div>
 {% endblock %}
-
-

@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="form-container">
+    <h2>Edit Your Profile</h2>
+    <form method="POST">
+        {{ form.hidden_tag() }}
+        <p>{{ form.description.label }}<br>{{ form.description(rows=6, cols=40) }}</p>
+        <p>{{ form.submit(class="btn") }}</p>
+    </form>
+</div>
+{% endblock %}

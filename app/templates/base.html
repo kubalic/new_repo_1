@@ -10,18 +10,22 @@
 
 <!-- Top Left Dashboard Button -->
 <div class="top-left">
-    <a href="{{ url_for('routes.index') }}">🏠 Dashboard</a>
+    <a href="{{ url_for('routes.index') }}"> Dashboard</a>
 </div>
 
 <!-- Top Navigation Bar (no background shading) -->
 <div class="top-bar no-background">
     {% if current_user.is_authenticated %}
+        <form action="{{ url_for('routes.search_user') }}" method="GET" class="search-form">
+            <input type="text" name="username" placeholder="Search user..." class="search-input" required>
+        </form>
         <a href="{{ url_for('routes.profile') }}">My Profile</a>
     {% else %}
         <a href="{{ url_for('routes.login') }}">Login</a>
         <a href="{{ url_for('routes.register') }}">Register</a>
     {% endif %}
 </div>
+
 
 <!-- Flash Messages -->
 {% with messages = get_flashed_messages(with_categories=true) %}
@@ -42,10 +46,11 @@
   <div class="gallery">
     {% for plant in user_plants %}
       <div class="gallery-card">
-        <div class="gallery-name">{{ plant.owner.username }} – {{ plant.category.name }}</div>
+        <div class="gallery-name"><a href="{{ url_for('routes.view_user', username=plant.owner.username) }}">{{ plant.owner.username }}</a> – {{ plant.category.name }}</div>
         {% if plant.photo_path %}
           <img src="{{ url_for('static', filename='uploads/' ~ plant.photo_path) }}" alt="{{ plant.category.name }}">
         {% endif %}
+        <div class="gallery-nickname">Nickname: {{ plant.plant_name }}</div>
       </div>
     {% endfor %}
   </div>
@@ -65,6 +70,7 @@
 
 </body>
 </html>
+
 
 
 

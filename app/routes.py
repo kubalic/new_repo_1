@@ -18,6 +18,16 @@ def index():
     user_plants = Plant.query.all()
     return render_template('index.html', user_plants=user_plants)
 
+# Search for another user by username
+@routes.route('/search-user')
+@login_required
+def search_user():
+    username = request.args.get('username')
+    user = User.query.filter_by(username=username).first()
+    if not user:
+        flash("User not found.", "warning")
+        return redirect(url_for('routes.index'))
+    return redirect(url_for('routes.view_user', username=user.username))
 
 
 # User registration
@@ -137,6 +147,14 @@ def add_category():
 def profile():
     plants = Plant.query.filter_by(username=current_user.username).all()
     return render_template('profile.html', plants=plants)
+
+# View another user's profile (read-only)
+@routes.route('/user/<username>')
+@login_required
+def view_user(username):
+    user = User.query.filter_by(username=username).first_or_404()
+    return render_template('public_profile.html', user=user, plants=user.plants)
+
 
 # Edit profile description
 @routes.route('/edit-profile', methods=['GET', 'POST'])

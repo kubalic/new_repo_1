@@ -17,8 +17,10 @@ class PlantCategory(db.Model):
     latin_name = db.Column(db.String(100), primary_key=True)
     name = db.Column(db.String(100), nullable=False)
     watering_interval = db.Column(db.Integer, nullable=False)
+    info = db.Column(db.Text)  
 
     plants = db.relationship('Plant', backref='category', lazy=True)
+
 
 
 class Plant(db.Model):

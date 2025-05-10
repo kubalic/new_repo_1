@@ -3,6 +3,7 @@ from wtforms import StringField, PasswordField, SubmitField, DateField, SelectFi
 from wtforms.validators import DataRequired, Email, EqualTo, Length
 from flask_wtf.file import FileAllowed
 
+
 class LoginForm(FlaskForm):
     username = StringField('Username', validators=[DataRequired()])
     password = PasswordField('Password', validators=[DataRequired()])
@@ -22,12 +23,15 @@ class AddPlantForm(FlaskForm):
     photo = FileField('Upload photo', validators=[FileAllowed(['jpg', 'png'])])
     description = TextAreaField('Description (optional)', validators=[Length(max=500)])
     submit = SubmitField('Add Plant')
+ 
 
 class AddCategoryForm(FlaskForm):
     name = StringField('Common Name', validators=[DataRequired()])
     latin_name = StringField('Latin Name', validators=[DataRequired()])
     watering_interval = StringField('Watering Interval (days)', validators=[DataRequired()])
+    info = TextAreaField('General Info or Fun Fact')  
     submit = SubmitField('Add Category')
+
 
 class UpdateProfileForm(FlaskForm):
     description = TextAreaField('Your Bio / Description', validators=[Length(max=1000)])
